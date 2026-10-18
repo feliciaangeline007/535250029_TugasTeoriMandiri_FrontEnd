@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial & Dokumentasi Instalasi Next.js — Kopi Nusantara (535250029)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --ink: #1e293b;
+      --muted: #475569;
+      --subtle: #64748b;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --coffee-dark: #35241d;
+      --coffee-accent: #a94e36;
+      --coffee-cream: #fbf5e9;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      padding: 36px 20px 60px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .action-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-link {
+      display: inline-block;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-primary {
+      background: var(--coffee-accent);
+      color: #ffffff;
+      border: 1px solid var(--coffee-accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--coffee-dark);
+      border-color: var(--coffee-dark);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--coffee-cream);
+      color: var(--coffee-accent);
+      border: 1px solid #e2d5c1;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 26px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--subtle);
+      margin-bottom: 22px;
+    }
+
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .meta-table th,
+    .meta-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-light);
+      text-align: left;
+    }
+
+    .meta-table th {
+      width: 220px;
+      background: #f8fafc;
+      color: var(--muted);
+      font-weight: bold;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    h2 {
+      font-size: 19px;
+      color: var(--ink);
+    }
+
+    h3 {
+      font-size: 15px;
+      color: var(--ink);
+      margin: 18px 0 8px;
+    }
+
+    p {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 13px;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 16px 18px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 12px 0 16px;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      font-size: 13px;
+    }
+
+    .screenshot-box {
+      margin-top: 14px;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .screenshot-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .screenshot-caption {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--subtle);
+      border-top: 1px solid var(--border-light);
+      background: #ffffff;
+    }
+
+    .note-box {
+      background: #f0f9ff;
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 14px 0;
+      font-size: 14px;
+      color: #0c4a6e;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--subtle);
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 20px;
+      }
+
+      .meta-table th {
+        width: 130px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="top-nav">
+      <a href="../index.html" class="back-link">&larr; Kembali ke Daftar Tugas</a>
+      <div class="action-links">
+        <a href="../535250029_FeliciaAngeline_Tugas9_InstalasiNextjs.pdf" class="btn-link btn-outline" target="_blank">Buka Laporan PDF</a>
+        <a href="../Tugas6_TugasBootstrap/index.html" class="btn-link btn-primary">Lihat Desain Kopi Nusantara</a>
+      </div>
+    </nav>
+
+    <!-- Header & Identitas -->
+    <section class="card">
+      <span class="badge">Pertemuan 9 &bull; Instalasi Next.js</span>
+      <h1>Tutorial &amp; Dokumentasi Proyek <code>kopi-nusantara-next</code></h1>
+      <p class="subtitle">
+        Panduan langkah demi langkah instalasi proyek Next.js (App Router + TypeScript + ESLint) dan migrasi tampilan Website Toko Kopi Nusantara.
+      </p>
+
+      <table class="meta-table">
+        <tbody>
+          <tr>
+            <th>Mata Kuliah</th>
+            <td>Front-End Programming (TK23023)</td>
+          </tr>
+          <tr>
+            <th>Pertemuan / Topik</th>
+            <td>9 — Setelah UTS / Instalasi Next.js</td>
+          </tr>
+          <tr>
+            <th>Dosen Pengampu</th>
+            <td>Janson Hendryli, M.Kom. / Irvan Lewenusa, M.Kom.</td>
+          </tr>
+          <tr>
+            <th>Nama Lengkap</th>
+            <td><strong>Felicia Angeline</strong></td>
+          </tr>
+          <tr>
+            <th>NIM</th>
+            <td><strong>535250029</strong></td>
+          </tr>
+          <tr>
+            <th>Nama Proyek</th>
+            <td><code>kopi-nusantara-next</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Langkah 1 -->
+    <section class="card">
+      <div class="step-header">
+        <span class="step-number">1</span>
+        <h2>Verifikasi Node.js, npm, dan Instalasi Proyek Next.js</h2>
+      </div>
+      <p>
+        Sebelum membuat proyek Next.js, pastikan <strong>Node.js</strong> dan <strong>npm</strong> sudah terinstal pada komputer dengan menjalankan perintah verifikasi versi di terminal:
+      </p>
+      <pre><code>node -v
+npm -v</code></pre>
+
+      <p>
+        Selanjutnya, buat proyek Next.js baru bernama <code>kopi-nusantara-next</code> menggunakan <code>create-next-app@latest</code> dengan opsi konfigurasi berikut:
+      </p>
+      <pre><code>npx create-next-app@latest kopi-nusantara-next</code></pre>
+
+      <ul>
+        <li>Would you like to use <strong>TypeScript</strong>? &rarr; <code>Yes</code></li>
+        <li>Would you like to use <strong>ESLint</strong>? &rarr; <code>Yes</code></li>
+        <li>Would you like to use <strong>Tailwind CSS</strong>? &rarr; <code>No</code></li>
+        <li>Would you like your code inside a <strong><code>src/</code> directory</strong>? &rarr; <code>No</code></li>
+        <li>Would you like to use <strong>App Router</strong>? (recommended) &rarr; <code>Yes</code></li>
+        <li>Would you like to customize the <strong>import alias</strong> (<code>@/*</code> by default)? &rarr; <code>No</code></li>
+      </ul>
+
+      <pre><code>feliciaangeline@MacBook ~ % node -v
+v26.9.0
+feliciaangeline@MacBook ~ % npm -v
+11.19.1
+feliciaangeline@MacBook ~ % npx create-next-app@latest kopi-nusantara-next
+✔ Would you like to use TypeScript? … Yes
+✔ Would you like to use ESLint? … Yes
+✔ Would you like to use Tailwind CSS? … No
+✔ Would you like your code inside a `src/` directory? … No
+✔ Would you like to use App Router? (recommended) … Yes
+✔ Would you like to customize the import alias (`@/*` by default)? … No
+Success! Created kopi-nusantara-next at .../kopi-nusantara-next</code></pre>
+    </section>
+
+    <!-- Langkah 2 -->
+    <section class="card">
+      <div class="step-header">
+        <span class="step-number">2</span>
+        <h2>Struktur Folder Proyek Next.js (App Router)</h2>
+      </div>
+      <p>
+        Setelah instalasi selesai, struktur direktori utama pada folder <code>kopi-nusantara-next/</code> adalah sebagai berikut:
+      </p>
+      <pre><code>kopi-nusantara-next/
+├── app/
+│   ├── favicon.ico       # Ikon tab browser
+│   ├── globals.css       # Styling global &amp; tema Kopi Nusantara
+│   ├── layout.tsx        # Root layout (metadata &amp; Bootstrap 5.3.3 stylesheet)
+│   └── page.tsx          # Halaman utama (/) dengan komponen Kopi Nusantara
+├── public/               # Aset statis publik (SVG, gambar)
+├── eslint.config.mjs     # Konfigurasi linter ESLint
+├── next.config.ts        # Konfigurasi Next.js
+├── package.json          # Daftar dependencies &amp; script npm
+└── tsconfig.json         # Konfigurasi TypeScript</code></pre>
+    </section>
+
+    <!-- Langkah 3 -->
+    <section class="card">
+      <div class="step-header">
+        <span class="step-number">3</span>
+        <h2>Modifikasi <code>app/layout.tsx</code> dan <code>app/page.tsx</code></h2>
+      </div>
+      <p>
+        Pada file <a href="app/layout.tsx"><code>app/layout.tsx</code></a>, ditambahkan metadata halaman serta pemuatan CSS Bootstrap 5.3.3 agar seluruh kelas grid dan utilitas responsif berjalan dengan baik:
+      </p>
+      <pre><code>import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Kopi Nusantara — Felicia Angeline (535250029)",
+  description: "Kopi Nusantara dengan cita rasa khas Indonesia — Tugas Pertemuan 9 Instalasi Next.js",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly&lt;{
+  children: React.ReactNode;
+}&gt;) {
+  return (
+    &lt;html lang="id"&gt;
+      &lt;head&gt;
+        &lt;link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+        /&gt;
+      &lt;/head&gt;
+      &lt;body&gt;{children}&lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre>
+
+      <p>
+        Selanjutnya, file <a href="app/page.tsx"><code>app/page.tsx</code></a> dimodifikasi menggunakan sintaks <strong>TypeScript + JSX</strong> untuk mempertahankan desain lengkap Kopi Nusantara (Navbar responsif, Hero, Menu dengan tombol <em>Suka</em> interaktif berbasis React State, Cerita, FAQ Accordion, dan Footer) serta menampilkan identitas mahasiswa (<strong>Felicia Angeline — NIM: 535250029</strong>):
+      </p>
+      <pre><code>export default function Home(): JSX.Element {
+  // State interaktif untuk navigasi mobile, tombol Suka menu, dan FAQ accordion
+  const [navOpen, setNavOpen] = useState&lt;boolean&gt;(false);
+  const [likedMap, setLikedMap] = useState&lt;Record&lt;number, boolean&gt;&gt;({});
+  const [likeCounts, setLikeCounts] = useState&lt;Record&lt;number, number&gt;&gt;({
+    1: 0,
+    2: 0,
+    3: 0,
+  });
+  const [openFaq, setOpenFaq] = useState&lt;string | null&gt;(null);
+
+  return (
+    &lt;&gt;
+      &lt;header className="site-header sticky-top"&gt;...&lt;/header&gt;
+      &lt;main&gt;
+        &lt;section className="hero py-5" id="home"&gt;
+          &lt;div className="container py-lg-5"&gt;
+            &lt;p className="eyebrow mb-2"&gt;Kopi Nusantara&lt;/p&gt;
+            &lt;h1 className="mb-3"&gt;
+              Rasa Lokal, &lt;em&gt;Cerita Istimewa.&lt;/em&gt;
+            &lt;/h1&gt;
+            &lt;div className="student-identity"&gt;
+              &lt;p className="student-name"&gt;Felicia Angeline&lt;/p&gt;
+              &lt;p className="student-nim"&gt;NIM: 535250029&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+        {/* Bagian Menu, Cerita, FAQ, dan Order */}
+      &lt;/main&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+    </section>
+
+    <!-- Langkah 4 -->
+    <section class="card">
+      <div class="step-header">
+        <span class="step-number">4</span>
+        <h2>Menjalankan Development Server (<code>npm run dev</code>)</h2>
+      </div>
+      <p>
+        Untuk menjalankan aplikasi Next.js secara lokal di komputer Anda, buka terminal dan jalankan perintah berikut:
+      </p>
+      <pre><code>cd kopi-nusantara-next
+npm install
+npm run dev</code></pre>
+
+      <div class="note-box">
+        <strong>Tips Pemeriksaan Kualitas Kode:</strong> Anda juga dapat menjalankan <code>npm run lint</code> untuk memeriksa aturan ESLint dan <code>npm run build</code> untuk memverifikasi proses <em>production build</em> Next.js.
+      </div>
+
+      <pre><code>▲ Next.js 16.4.2 (Turbopack)
+- Local:        http://localhost:3000
+- Network:      http://10.78.178.1:3000
+
+✓ Ready in 404ms
+✓ Compiled / in 14ms (GET / 200)</code></pre>
+    </section>
+
+    <!-- Langkah 5 -->
+    <section class="card">
+      <div class="step-header">
+        <span class="step-number">5</span>
+        <h2>Hasil Tampilan pada Browser (<code>http://localhost:3000</code>)</h2>
+      </div>
+      <p>
+        Buka alamat <code>http://localhost:3000</code> pada browser untuk melihat halaman utama <strong>Kopi Nusantara</strong> yang telah berjalan di atas Next.js beserta Nama Lengkap (<strong>Felicia Angeline</strong>) dan NIM (<strong>535250029</strong>). Dokumentasi tangkapan layar lengkap (desktop &amp; mobile) dapat dilihat pada dokumen laporan PDF di bawah ini:
+      </p>
+      <div class="action-links">
+        <a href="../535250029_FeliciaAngeline_Tugas9_InstalasiNextjs.pdf" class="btn-link btn-outline" target="_blank">Buka Laporan Lengkap (PDF)</a>
+        <a href="../Tugas6_TugasBootstrap/index.html" class="btn-link btn-primary">Preview Desain Kopi Nusantara</a>
+      </div>
+    </section>
+
+    <footer>
+      Felicia Angeline &bull; NIM: 535250029 &bull; Universitas Tarumanagara &bull; 2026
+    </footer>
+  </div>
+</body>
+</html>
